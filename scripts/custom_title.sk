@@ -1,0 +1,142 @@
+variables:
+    {title_bedrock.%player%} = "일반 유저"
+
+on chat:
+    set message format to "%{title_bedrock.%player%}% &f: %message%"
+		
+command /titlebook [<string>]:
+    permission: op
+    trigger:
+        if arg 1 is "UnRanked":
+            give 1 of bedrock named "UnRanked" to player
+			
+        if arg 1 is "Bronze 1":
+            give 1 of bedrock named "Bronze 1" to player
+
+        if arg 1 is "Bronze 2":
+            give 1 of bedrock named "Bronze 2" to player
+
+        if arg 1 is "Bronze 3":
+            give 1 of bedrock named "Bronze 3" to player
+
+        if arg 1 is "Gold 1":
+            give 1 of bedrock named "Gold 1" to player
+			
+        if arg 1 is "Gold 2":
+            give 1 of bedrock named "Gold 2" to player
+
+        if arg 1 is "Gold 3":
+            give 1 of bedrock named "Gold 3" to player
+
+        if arg 1 is "Iron 1":
+            give 1 of bedrock named "Iron 1" to player
+
+        if arg 1 is "Iron 2":
+            give 1 of bedrock named "Iron 2" to player
+
+        if arg 1 is "Iron 3":
+            give 1 of bedrock named "Iron 3" to player
+        
+        if arg 1 is "Diamond 1":
+            give 1 of bedrock named "Diamond 1" to player
+
+        if arg 1 is "Diamond 2":
+            give 1 of bedrock named "Diamond 2" to player
+
+        if arg 1 is "Diamond 3":
+            give 1 of bedrock named "Diamond 3" to player
+
+        if arg 1 is "Platinum 1":
+            give 1 of bedrock named "Platinum 1" to player
+
+        if arg 1 is "Platinum 2":
+            give 1 of bedrock named "Platinum 2" to player
+
+        if arg 1 is "Platinum 3":
+            give 1 of bedrock named "Platinum 3" to player
+            
+        if arg 1 is "all":
+            give 1 of bedrock named "UnRanked" to player
+            give 1 of bedrock named "Bronze 1" to player
+            give 1 of bedrock named "Bronze 2" to player
+            give 1 of bedrock named "Bronze 3" to player
+            give 1 of bedrock named "Gold 1" to player
+            give 1 of bedrock named "Gold 2" to player
+            give 1 of bedrock named "Gold 3" to player
+            give 1 of bedrock named "Iron 1" to player
+            give 1 of bedrock named "Iron 2" to player
+            give 1 of bedrock named "Iron 3" to player
+            give 1 of bedrock named "Diamond 1" to player
+            give 1 of bedrock named "Diamond 2" to player
+            give 1 of bedrock named "Diamond 3" to player
+            give 1 of bedrock named "Platinum 1" to player
+            give 1 of bedrock named "Platinum 2" to player
+            give 1 of bedrock named "Platinum 3" to player
+
+on rightclick with bedrock:
+    player's world = "shop":
+        if name of tool of player is "UnRanked":
+            set {title_bedrock.%player%} to "&5[UnRanked]"
+            Message "%player%님의 칭호가 &5[UnRanked]&f로 변경되었습니다."
+
+        if name of tool of player is "Bronze 1":
+            set {title_bedrock.%player%} to "&5[Bronze 1]"
+            message "%player%님의 칭호가 &5[Bronze 1]&f로 변경되었습니다."
+
+        if name of tool of player is "Bronze 2":
+            set {title_bedrock.%player%} to "&5[Bronze 2]"
+            message "%player%님의 칭호가 &5[Bronze 2]&f로 변경되었습니다."
+
+        if name of tool of player is "Bronze 3":
+            set {title_bedrock.%player%} to "&5[Bronze 3]"
+            message "%player%님의 칭호가 &5[Bronze 3]&f로 변경되었습니다."
+
+        if name of tool of player is "Iron 1":
+            set {title_bedrock.%player%} to "&5[Iron 1]"
+            message "%player%님의 칭호가 &5[Iron 1]&f로 변경되었습니다."
+
+        if name of tool of player is "Iron 2":
+            set {title_bedrock.%player%} to "&5[Iron 2]"
+            message "%player%님의 칭호가 &5[Iron 2]&f로 변경되었습니다."
+
+        if name of tool of player is "Iron 3":
+            set {title_bedrock.%player%} to "&5[Iron 3]"
+            message "%player%님의 칭호가 &5[Iron 3]&f로 변경되었습니다."
+
+        if name of tool of player is "Gold 1":
+            set {title_bedrock.%player%} to "&5[Gold 1]"
+            message "%player%님의 칭호가 &5[Gold 1]&f로 변경되었습니다."
+
+        if name of tool of player is "Gold 2":
+            set {title_bedrock.%player%} to "&5[Gold 2]"
+            message "%player%님의 칭호가 &5[Gold 2]&f로 변경되었습니다."
+
+        if name of tool of player is "Gold 3":
+            set {title_bedrock.%player%} to "&5[Gold 3]"
+            message "%player%님의 칭호가 &5[Gold 3]&f로 변경되었습니다."
+
+        if name of tool of player is "Platinum 1":
+            set {title_bedrock.%player%} to "&5[Platinum 1]"
+            message "%player%님의 칭호가 &5[Platinum 1]&f로 변경되었습니다."
+
+        if name of tool of player is "Platinum 2":
+            set {title_bedrock.%player%} to "&5[Platinum 2]"
+            message "%player%님의 칭호가 &5[Platinum 2]&f로 변경되었습니다."
+
+        if name of tool of player is "Platinum 3":
+            set {title_bedrock.%player%} to "&5[Platinum 3]"
+            message "%player%님의 칭호가 &5[Platinum 3]&f로 변경되었습니다."
+
+        if name of tool of player is "Diamond 1":
+            set {title_bedrock.%player%} to "&5[Diamond 1]"
+            message "%player%님의 칭호가 &5[Diamond 1]&f로 변경되었습니다."
+
+        if name of tool of player is "Diamond 2":
+            set {title_bedrock.%player%} to "&5[Diamond 2]"
+            message "%player%님의 칭호가 &5[Diamond 2]&f로 변경되었습니다."
+
+        if name of tool of player is "Diamond 3":
+            set {title_bedrock.%player%} to "&5[Diamond 3]"
+            message "%player%님의 칭호가 &5[Diamond 3]&f로 변경되었습니다."
+
+

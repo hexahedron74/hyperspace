@@ -1,0 +1,136 @@
+on walking on green concrete powder:
+    player's world = "Lobby":
+        execute console command "mw move %player% Info"
+        Message "&7<HyperSpace System> &5[Info] &b하이퍼스페이스 정보 월드로 텔레포트 하였습니다."
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on blue concrete powder:
+    player's world = "Lobby" or "X-RUN" or "SKYWAR" or "Info" or "playground":
+        execute console command "mw move %player% Lobby"
+        Message "&7<HyperSpace System> &5[Lobby] &b로비로 텔레포트 하였습니다."
+        if player is not op:
+            execute console command "gamemode survival %player%"
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on gray concrete powder:
+    player's world = "Lobby":
+        execute console command "mw move %player% X-RUN"
+        Message "&7<HyperSpace System> &5[X_RUN] &b엑스런으로 텔레포트 하였습니다."
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on yellow concrete powder:
+    player's world = "Lobby":
+        execute console command "mw move %player% SKYWAR"
+        Message "&7<HyperSpace System> &5[SKYWARS] &b스카이워즈로 텔레포트 하였습니다."
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on light gray concrete powder:
+    player's world = "Lobby":
+        execute console command "mw move %player% SURVIVAL"
+        Message "&7<HyperSpace System> &5[SURVIVAL] &b서바이벌로 텔레포트 하였습니다."
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on cyan wool:
+    if player is op:
+        player's world = "Lobby":
+            execute player command "/tp -11.502 53 -17.541"
+            Message "&7<HyperSpace System> &b운영자를 운영자 기지로 순간이동하였습니다."
+            play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+    if player is not op:
+        player's world = "Lobby":
+            Message "&7<HyperSpace System> &c이 포탈은 운영자만 사용할 수 있습니다."
+            Message "&c운영자에게 문의하시면 포탈을 사용 할 수도...?"
+
+on walking on stripped acacia wood:
+    if player is op:
+        player's world = "Lobby":
+            execute player command "/tp -54.616 12 36.407"
+            Message "&7<HyperSpace System> &b운영자를 폭포로 순간이동하였습니다."
+            play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+    if player is not op:
+        player's world = "Lobby":
+            Message "&7<HyperSpace System> &c이 포탈은 운영자만 사용할 수 있습니다."
+            Message "&c운영자에게 문의하시면 포탈을 사용 할 수도...?"
+
+on walking on dark prismarine:
+    if player is op:
+        player's world = "SKYWAR" or "Lobby":
+            execute console command "mw move %player% SKYWAR"
+            execute player command "/tp -57.438 177 -114.491"
+            Message "&7<HyperSpace System> &5[SKYWARS] &b운영자를 관전 장소로 텔레포트 하였습니다."
+            play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+    if player is not op:
+        player's world = "SKYWAR" or "Lobby":
+            Message "&7<HyperSpace System> &c이 포탈은 운영자만 사용할 수 있습니다."
+            Message "&c운영자에게 문의하시면 포탈을 사용 할 수도...?"
+
+on walking on black glazed terracotta:
+    if player is op:
+        execute player command "/tp -63.769 82 -123.3"
+        Message "&7<HyperSpace System> &5[SKYWARS] &b운영자를 관리 기지로 텔레포트 하였습니다."
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+    if player is not op:
+        Message "&7<HyperSpace System> &c이 포탈은 운영자만 사용할 수 있습니다."
+        Message "&c운영자에게 문의하시면 포탈을 사용 할 수도...?"
+
+on enter "adminportal":
+    message "&7<HyperSpace System> &f여기는 서버 운영자 메인 포탈입니다." to player
+    if player is op:
+        message "&7<HyperSpace System> &f서버 운영자 [&b%player%] 님이 메인 포탈에 입장하셨습니다." to player
+    if player is not op:
+        cancel event
+        message "&7<HyperSpace System> &c당신은 서버 운영자가 아니므로 입장 불가능합니다." to player
+
+on exit "adminportal":
+        message "&7<HyperSpace System> &f서버 운영자 [&b%player%] 님이 메인 포탈에서 퇴장하셨습니다." to player
+
+on enter "falls":
+    message "&7<HyperSpace System> &f여기를 찾았군요! 아쉽지만 여기는 운영자만 사용할 수 있어요." to player
+    message "&7<HyperSpace System> &f하지만! 이벤트로 운영자가 다니는 비밀 공간을 체험 할 수도..?" to player
+
+on walking on stripped birch wood:
+    player's world = "Info" and "Lobby_nether":
+        execute console command "effect give %player% minecraft:jump_boost 1 13 false"
+
+on walking on coarse dirt:
+    player's world = "Lobby":
+        execute console command "fill -27 11 50 -27 11 50 minecraft:air"
+        wait 2 seconds
+        execute console command "fill -27 11 50 -27 11 50 minecraft:coarse_dirt"
+
+on walking on light gray wool:
+    player's world = "Lobby":
+        execute console command "mw move %player% Shop"
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on polished andesite:
+    player's world = "Lobby":
+        execute console command "tp %player% -26 12 48"
+
+on walking on podzol:
+    player's world = "Lobby":
+        send "Type /login <password>"
+
+on walking on acacia planks:
+    player's world = "X-RUN":
+        execute console command "mw move %player% pakour"
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+
+on walking on red concrete:
+    player's world = "pakour":
+        execute console command "kill %player%"
+
+on walking on prismarine bricks:
+    player's world = "pakour":
+        execute console command "effect give %player% minecraft:speed 99999 35 false"
+
+on walking on dark prismarine:
+    player's world = "pakour":
+        execute console command "effect clear %player% minecraft:speed"
+
+on walking on white concrete powder:
+    player's world = "Lobby_nether":
+        execute console command "mw move %player% pakour"
+        execute player command "tp %player% -172.53 35.00 461.58"
+        play sound "block.end_gateway.spawn" with volume 1 and pitch 1 at all players for player
+

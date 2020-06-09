@@ -1,0 +1,221 @@
+on join:
+    set join message to "&b%player%! Welcome to the HyperSpace!"
+
+on quit:
+    set quit message to "&a%player% Left the HyperSpace"
+
+on explosion:
+    cancel event
+
+on server list ping:
+    set motd to "&bWelcome to the HyperSpace!"
+
+on join:
+    set tab header to "&b하이퍼스페이스에 오신 것을 환영합니다!%nl%" and footer to "접속자 수: &e%number of all players% %nl%%player%님 재미있게 플레이하세요!" for player
+
+command /ChatClear [<string>]:
+    trigger:
+        if arg 1 is "me":
+            loop 100 times:
+                message ""
+            message "당신의 채팅창이 청소되었습니다."
+        if arg 1 is "all":
+            if player is op:
+                loop 100 times:
+                    broadcast ""
+                broadcast "채팅창이 청소되었습니다. [ 청소자: %player% ]"
+            else:
+                message "&c당신은 관리자 권한이 아니기 때문에 전체 채팅 청소를 하실 수 없습니다."
+
+command /hyperspace_info:
+    trigger:
+        message "이 서버는 여러가지 장르의 서버입니다."
+
+every 5 seconds:
+    loop all players:
+        wipe loop-player's sidebar
+        set name of sidebar of loop-player to "&b&lHyperSpace"
+        set score "&7==================" in sidebar of loop-player to 11
+        set score  "&6> 닉네임" in sidebar of loop-player to 10
+        set score  "&e- %loop-player%" in sidebar of loop-player to 9
+        set score "   " in sidebar of loop-player to 8
+        set score "&6> 접속자 수" in sidebar of loop-player to 7
+        set score "&e- %number of all players%" in sidebar of loop-player to 6
+        set score "  " in sidebar of loop-player to 5
+        set score "&6죽은 횟수" in sidebar of loop-player to 4
+        set score "&e- %{죽은수.%loop-player%}%" in sidebar of loop-player to 3
+        set score " " in sidebar of loop-player to 2
+        set score "&6현재 시각" in sidebar of loop-player to 1
+        set score "&e- %now%" in sidebar of loop-player to 0
+        
+
+variables:
+    {죽은수.%player%} = 0
+
+on death:
+    add 1 to {죽은수.%player%}
+
+on death of player:
+    if attacker is a player:
+        set the death message to "&6%attacker%&f님이 &6%victim%&f님을 &5[%attacker's tool%]&f로 아작냈습니다."
+    if attacker is a zombie:
+        set the death message to "%victim%님이 좀비에게 물려 미국 갔습니다."
+    if attacker is a creeper:
+        set the death message to "%victim%님이 크리퍼에게 터져 미국 갔습니다."
+
+on join:
+    send action bar "&b하이퍼스페이스에 오신 것을 환영합니다!!" to player
+
+
+on place of tnt:
+    if player is not op:
+        player's world = "Lobby" or "X-RUN" or "Info":
+            cancel event
+            set player's tool to air
+            message "&c당신은 TNT 블럭을 설치할 권한이 없습니다!!"
+            send "&7<HyperSpace System> &f%player%님께서 서버에 TNT를 터트리려고 하는것이 감지되었습니다." to "Ithan" parsed as player
+
+on place of redstone:
+    if player is not op:
+        cancel event
+        set player's tool to air
+        message "&c당신은 레드스톤을 설치할 권한이 없습니다!!"
+
+
+command /ai:
+    trigger:
+        if player is op:
+            give 1 wood axe named "WorldEdit" with lore "WorldEdit Wand" to player
+            give 1 command block named "Command Block" with lore "커맨드 블럭" to player
+            give 1 diamond sword of sharpness 1000 named "다이아 검" with lore "다이아 검" to player
+            give 1 arrow  named "Brush" with lore "Brush" to player
+            give 1 gunpowder named "브러쉬 배터리" with lore "브러쉬 배터리" to player
+            set {ai.%player%} to true
+            message "기본템을 지급하였습니다."
+            
+
+on drop:
+    if player is not op:
+        cancel event
+
+command /w [<offline player>] [<text>]:
+  aliases: /message, /pm, /whisper
+  trigger:
+    if argument 1 is set:
+      if argument 2 is set:
+        if arg-1 is online:
+          send "&6%player% > %arg-1% &e%arg-2%" to player
+          send "&6%player% > %arg-1% &e%arg-2%" to arg 1
+        else:
+          send "&9Message> &7Locating &e%arg-1%&7..."
+          wait 5 seconds #Lol ........ MAGIC
+          send "&9Message> &7Could not locate &e%arg-1%&7."
+      else:
+        message "argument 2 not set"
+    else:
+      message "argument 1 not set"
+
+command /tpa <player>:
+	trigger:
+		set {essentials.tpa.%argument 1%} to player
+		send " &e%{essentials.tpa.%argument 1%}%님께서 당신에게 텔레포트를 하기를 원합니다." to arg-1
+		send "텔레포트를 수락 하시고 싶으시면 /tpaccept를 하세요." to arg-1
+		send "텔레포트를 거절 하시고 싶으시면 /tpdeny를 하세요." to arg-1
+		message "&e당신의 요청이 전송되었습니다." to player 
+
+command /tpaccept:
+	trigger:
+		if {essentials.tpa.%player%} exists:
+			teleport {essentials.tpa.%player%} to location of player
+			send "&e%{essentials.tpa.%player%}%님이 당신에게 텔레포트 되었습니다." to player 
+			send "당신의 텔레포트 요청이 수락되었습니다." to {essentials.tpa.%player%} 
+			delete {essentials.tpa.%player%} 
+		else:
+			message "&e보류중인 요청이 없습니다" to player 
+
+command /tpdeny:
+	trigger:
+		if {essentials.tpa.%player%} exists:
+			send "당신의 텔레포트 신청은 거절 당했습니다." to {essentials.tpa.%player%} 
+			delete {essentials.tpa.%player%} 
+		else:
+			message "&e보류중인 요청이 없습니다" to player 
+			
+			
+on disconnect:
+	delete {essentials.tpa.%player%} 
+	
+command /notice [<string>]:
+    permission: op
+    trigger:
+        if arg 1 is "check":
+            broadcast "====================================="
+            broadcast "                     공지사항                 "
+            broadcast "이번주 일요일에는 서버 점검이 있겠습니다."
+            broadcast "일요일에는 서버를 열지 않습니다.[00:00 ~ 23:59]"
+            broadcast "점검 내용:"
+            broadcast "1. 서바이벌 맵 리셋"
+            broadcast "2. 계절 별 맵 바꿈"
+            broadcast "3. 이벤트 추가"
+            broadcast "4. 더 많은 기능 추가"
+            broadcast "====================================="
+
+        if arg 1 is not set:
+            message "Command Help: /notice [check]"
+
+on right click on iron door:
+    if player is op:
+        play sound "block.iron_door.open" with volume 1 and pitch 1 at all players for player
+        activate block
+        wait 2 seconds
+        play sound "block.iron_door.close" with volume 1 and pitch 1 at all players for player
+        deactivate block
+
+command /fly <player>:
+    permission: op
+    trigger:
+        set player's flight mode to true
+
+command /nfly <player>:
+    permission: op
+    trigger:
+        set player's flight mode to false
+
+
+command /login [<string>]:
+    trigger:
+        if arg 1 is "jwaresoft":
+            execute console command "fill 52 6 5 52 6 5 minecraft:air"
+            wait 2 seconds
+            execute console command "fill 52 6 5 52 6 5 minecraft:podzol"
+
+on right click on diamond block:
+    player's world =  "Info":
+        if player is op:
+            execute player command "/fill -376 5 154 -376 5 148 minecraft:air"
+            execute player command "/fill -376 13 155 -376 5 155 minecraft:bedrock"
+
+on right click on gold block:
+    player's world =  "Info":
+        if player is op:
+            execute player command "/fill -376 5 155 -376 5 148 minecraft:bedrock"
+            execute player command "/fill -376 13 155 -376 6 155 minecraft:air"
+
+on rightclick with carrot on a stick:
+    player's world = "pakour":
+        if player is not op:
+        execute console command "tp %player% -160 11 -197 in pakour"
+
+on drop:
+    item is a carrot on a stick:
+        cancel event
+
+on place of sand:
+    player's world = "pakour":
+        wait 0.1 seconds
+        set block to air
+
+
+
+
+

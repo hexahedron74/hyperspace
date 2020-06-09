@@ -1,0 +1,10 @@
+# === Skript's variable storage ===
+# Please do not modify this file manually!
+#
+# version: 2.5-alpha1
+
+scoreboard.ithan, boolean, 01
+죽은수.<none>, long, 0000000000000032
+죽은수.<player>, long, 0000000000000000
+죽은수.ithan, long, 0000000000000004
+
